@@ -1,6 +1,6 @@
 package org.hjjang;
 
-import org.hjjang.bean.BeanLoader;
+import org.hjjang.core.bean.BeanLoader;
 
 public class DIFramework {
     public static void main(String[] args) {
