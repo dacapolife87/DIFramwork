@@ -1,7 +1,7 @@
-package org.hjjang.component;
+package org.hjjang.servlet.component;
 
-import org.hjjang.annotation.Autowired;
-import org.hjjang.annotation.Component;
+import org.hjjang.core.annotation.Autowired;
+import org.hjjang.core.annotation.Component;
 
 @Component
 public class DIManageService {

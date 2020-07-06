@@ -1,4 +1,4 @@
-package org.hjjang.bean.collection;
+package org.hjjang.core.bean.collection;
 
 import java.util.Hashtable;
 import java.util.List;

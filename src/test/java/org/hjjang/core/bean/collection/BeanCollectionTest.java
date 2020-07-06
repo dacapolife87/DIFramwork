@@ -1,7 +1,6 @@
-package org.hjjang.bean.collection;
+package org.hjjang.core.bean.collection;
 
-import org.hjjang.annotation.Bean;
-import org.hjjang.component.DIComponent;
+import org.hjjang.servlet.component.DIComponent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
-package org.hjjang.component;
+package org.hjjang.servlet.component;
 
-import org.hjjang.annotation.Component;
+import org.hjjang.core.annotation.Component;
 
 @Component
 public class DIComponent {

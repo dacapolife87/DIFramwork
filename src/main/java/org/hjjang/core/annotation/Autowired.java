@@ -1,9 +1,8 @@
-package org.hjjang.annotation;
+package org.hjjang.core.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Bean {
-    String value() default "";
+public @interface Autowired {
 }

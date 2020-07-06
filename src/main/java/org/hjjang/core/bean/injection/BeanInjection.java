@@ -1,14 +1,14 @@
-package org.hjjang.bean.injection;
+package org.hjjang.core.bean.injection;
 
-import org.hjjang.annotation.Autowired;
-import org.hjjang.bean.collection.BeanCollection;
+import org.hjjang.core.annotation.Autowired;
+import org.hjjang.core.bean.collection.BeanCollection;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 public class BeanInjection {
 
-    public void injectDI() throws IllegalAccessException {
+    public static void injectDI() throws IllegalAccessException {
         List<Object> beanList = BeanCollection.getBeanList();
 
         for(Object bean : beanList){
@@ -16,7 +16,7 @@ public class BeanInjection {
         }
     }
 
-    private void getFieldList(Class bean) throws IllegalAccessException {
+    private static void getFieldList(Class bean) throws IllegalAccessException {
         Field[] declaredFields = bean.getDeclaredFields();
         for(Field field : declaredFields){
             boolean hasAutowiredAnnotaion = hasAutowiredAnnotaion(field);
@@ -33,7 +33,7 @@ public class BeanInjection {
 
     }
 
-    private boolean hasAutowiredAnnotaion(Field field) {
+    private static boolean hasAutowiredAnnotaion(Field field) {
         boolean hasAutowired = false;
         Autowired declaredAnnotation = field.getDeclaredAnnotation(Autowired.class);
         if(declaredAnnotation != null){
