@@ -10,8 +10,8 @@ public class BeanCollection {
 
     static Hashtable<String,Object> injectedBeanTable = new Hashtable<String,Object>();
 
-    public static void registBean(Class bean){
-        initBeanTable.put(bean.getName(),bean);
+    public static void registBean(String beanName, Object beanInstance){
+        initBeanTable.put(beanName,beanInstance);
     }
 
     public static Object getBean(String beanName){
@@ -26,8 +26,8 @@ public class BeanCollection {
         return initBeanTable.values().stream().collect(Collectors.toList());
     }
 
-    public static void registInjectBean(Class bean){
-        injectedBeanTable.put(bean.getName(),bean);
+    public static void registInjectBean(String bean,Object object){
+        injectedBeanTable.put(bean,object);
     }
 
     public static Object getInjectBean(String beanName){

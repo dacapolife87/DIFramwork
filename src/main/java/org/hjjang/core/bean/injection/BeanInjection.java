@@ -12,12 +12,13 @@ public class BeanInjection {
         List<Object> beanList = BeanCollection.getBeanList();
 
         for(Object bean : beanList){
-            getFieldList((Class) bean);
+            Object beanInstance = getFieldList(bean);
+            BeanCollection.registInjectBean(bean.getClass().getName(),beanInstance);
         }
     }
 
-    private static void getFieldList(Class bean) throws IllegalAccessException {
-        Field[] declaredFields = bean.getDeclaredFields();
+    private static Object getFieldList(Object bean) throws IllegalAccessException {
+        Field[] declaredFields = bean.getClass().getDeclaredFields();
         for(Field field : declaredFields){
             boolean hasAutowiredAnnotaion = hasAutowiredAnnotaion(field);
 
@@ -30,16 +31,13 @@ public class BeanInjection {
                 field.set(bean,typeBean);
             }
         }
-
+        return bean;
     }
 
     private static boolean hasAutowiredAnnotaion(Field field) {
         boolean hasAutowired = false;
         Autowired declaredAnnotation = field.getDeclaredAnnotation(Autowired.class);
         if(declaredAnnotation != null){
-            Class<?> fieldType = field.getType();
-
-            System.out.println(fieldType.getName());
             return true;
         }
         return hasAutowired;
