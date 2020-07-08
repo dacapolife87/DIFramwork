@@ -9,8 +9,9 @@ public class DIManageService {
     @Autowired
     DIComponent diComponent;
 
-    public void getUserInfo(){
+    public String getUserInfo(){
 
         System.out.println(diComponent.getName());
+        return diComponent.getName();
     }
 }
