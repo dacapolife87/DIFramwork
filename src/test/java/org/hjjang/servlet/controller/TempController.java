@@ -5,9 +5,11 @@ import org.hjjang.core.annotation.RequestMapping;
 import org.hjjang.core.annotation.RequestMethod;
 
 @Controller
-public class HelloController {
+public class TempController {
 
-    @RequestMapping(value = "/user/add",method = RequestMethod.POST)
-    public void printHello(){
+    @RequestMapping(value = "/api/test",method = RequestMethod.POST)
+    public String tempRequest(){
+        return "Tests";
+
     }
 }
