@@ -22,7 +22,7 @@ public class BeanCollection {
         return initBeanTable.get(beanName);
     }
 
-    public static int size(){
+    public static int beanSize(){
         return initBeanTable.size();
     }
 
@@ -36,6 +36,10 @@ public class BeanCollection {
 
     public static Object getInjectBean(String beanName){
         return injectedBeanTable.get(beanName);
+    }
+
+    public static List<Object> getIbjectBeanList(){
+        return injectedBeanTable.values().stream().collect(Collectors.toList());
     }
 
     public static void registRequestHandlerInfo(RequestHandlerInfo requestHandlerInfo){
