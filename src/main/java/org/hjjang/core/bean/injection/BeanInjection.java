@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BeanInjection {
 
-    public static void injectDI() throws IllegalAccessException {
+    public void injectDI() throws IllegalAccessException {
         List<Object> beanList = BeanCollection.getBeanList();
 
         for(Object bean : beanList){
@@ -17,7 +17,7 @@ public class BeanInjection {
         }
     }
 
-    private static Object getFieldList(Object bean) throws IllegalAccessException {
+    private Object getFieldList(Object bean) throws IllegalAccessException {
         Field[] declaredFields = bean.getClass().getDeclaredFields();
         for(Field field : declaredFields){
             boolean hasAutowiredAnnotaion = hasAutowiredAnnotaion(field);
@@ -34,7 +34,7 @@ public class BeanInjection {
         return bean;
     }
 
-    private static boolean hasAutowiredAnnotaion(Field field) {
+    private boolean hasAutowiredAnnotaion(Field field) {
         boolean hasAutowired = false;
         Autowired declaredAnnotation = field.getDeclaredAnnotation(Autowired.class);
         if(declaredAnnotation != null){

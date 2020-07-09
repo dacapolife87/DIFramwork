@@ -2,7 +2,7 @@ package org.hjjang.core.handler;
 
 import org.hjjang.core.annotation.RequestMapping;
 import org.hjjang.core.annotation.RequestMethod;
-import org.hjjang.core.bean.BeanLoader;
+import org.hjjang.core.bean.loader.BeanLoader;
 import org.hjjang.core.bean.collection.BeanCollection;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -19,9 +19,9 @@ import java.util.Set;
 
 public class RequestHandlerMapper {
 
-    static Logger logger = LoggerFactory.getLogger(BeanLoader.class);
+    Logger logger = LoggerFactory.getLogger(BeanLoader.class);
 
-    public static void registRequestMapper() {
+    public void registRequestMapper() {
         Reflections reflector = new Reflections(new ConfigurationBuilder()
                 .setUrls(ClasspathHelper.forPackage(""))
                 .setScanners(new MethodAnnotationsScanner())
@@ -34,12 +34,12 @@ public class RequestHandlerMapper {
         logger.debug("Register RequestMapper Finish! Total : {}", BeanCollection.requestHandlerSize());
     }
 
-    public static void registRequestMapperList(Method method){
+    private void registRequestMapperList(Method method){
         RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
         Class<?> methodDeclaringClass = method.getDeclaringClass();
         logger.debug("=====================================");
-        logger.debug(methodDeclaringClass.getName());
-        logger.debug(method.getName());
+        logger.debug("ControllerClass : {}, RequestMethod : {}",methodDeclaringClass.getName(),method.getName());
+
         RequestMethod[] requestMethods = requestMapping.method();
 
         List<String> allCaseUrls = getAllCaseRequestUrl(methodDeclaringClass, requestMapping);
@@ -50,13 +50,13 @@ public class RequestHandlerMapper {
         }
     }
 
-    private static List<String> getAllCaseRequestUrl(Class<?> clazz, RequestMapping requestMapping){
+    private List<String> getAllCaseRequestUrl(Class<?> clazz, RequestMapping requestMapping){
         List<String> urlListInClass = getUrlInRequestMappingFromInClass(clazz);
         if(urlListInClass.size() < 1) urlListInClass.add("");
         return getAllCaseByRequestMapping(urlListInClass, requestMapping.value());
     }
 
-    private static List<String> getAllCaseByRequestMapping(List<String> classUrls, String[] methodUrls){
+    private List<String> getAllCaseByRequestMapping(List<String> classUrls, String[] methodUrls){
         List<String> urlList = new ArrayList<>();
 
         for(String classUrl : classUrls){
@@ -69,7 +69,7 @@ public class RequestHandlerMapper {
     }
 
 
-    private static List<String> getUrlInRequestMappingFromInClass(Class<?> clazz){
+    private List<String> getUrlInRequestMappingFromInClass(Class<?> clazz){
         List<String> urlList = new ArrayList<>();
         RequestMapping requestMappingInClass = clazz.getAnnotation(RequestMapping.class);
 
